@@ -1,0 +1,21 @@
+﻿Tissue,Sex,Strain,genes,Genes specific to strain
+Par,Male,CD1,16,10
+Par,Male,C57,657,648
+Par,Female,CD1,12,10
+Par,Female,C57,192,190
+SL,Male,CD1,33,28
+SL,Male,C57,9,4
+SL,Female,CD1,64,61
+SL,Female,C57,13,10
+SM,Male,CD1,900,302
+SM,Male,C57,1453,855
+SM,Female,CD1,735,359
+SM,Female,C57,1050,674
+Liv,Male,CD1,224,144
+Liv,Male,C57,358,278
+Liv,Female,CD1,207,128
+Liv,Female,C57,492,413
+Panc,Male,CD1,64,60
+Panc,Male,C57,17,13
+Panc,Female,CD1,299,298
+Panc,Female,C57,17,16
