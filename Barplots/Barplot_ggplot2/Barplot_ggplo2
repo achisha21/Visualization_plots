@@ -1,0 +1,15 @@
+setwd("/Users/gbc-bioinformatics/Documents/Salivary glands/Mouse salivary glands/up_and_down_reg")
+library(RColorBrewer)
+library(readr)
+library(ggplot2)
+df <- read.csv("upreg.csv")
+colnames(df)<- c("Tissue", "Sex", "Strain","Genes", "Genes_specific_to_strain")
+df
+
+p = ggplot(df, aes(x = Strain, y = Genes_specific_to_strain)) 
+p+geom_col(aes(color = Sex, fill = Sex), position = position_dodge(0.8), width = 0.7) +
+  facet_grid(Sex~Tissue) +
+  scale_fill_brewer(palette = "Paired")+
+  scale_color_brewer(palette = "Paired")+
+  geom_jitter(width=0.1)+
+  theme_light() 
