@@ -1,0 +1,35 @@
+setwd("~/Documents/Salivary glands/Mouse salivary glands/violin_plots/Diseases/")
+
+genes=read.csv("ladd1.csv")
+genes1=read.csv("sialalithiasis1.csv")
+head(genes)
+library(ggplot2)
+library(RColorBrewer)
+library(cowplot)
+library("viridis") 
+
+mycolors = c(brewer.pal(name="Set1", n = 8), brewer.pal(name="Set1", n = 11))
+
+mycolors
+
+p=ggplot(genes, aes(x = Gene, y = log(Expression), fill = Strains))
+
+first=p+geom_boxplot(aes(col=Strains), alpha=0.3)  +
+  scale_color_manual(values = mycolors) + theme_light() + scale_fill_brewer(palette = "Dark2")+
+  scale_color_brewer(palette = "Dark2")
+
+first
+#dev.off()
+
+q=ggplot(genes1, aes(x = Gene, y = log(Expression), fill = Strain))
+
+second=q+geom_boxplot(aes(col=Strain), alpha=0.3) + 
+  scale_color_manual(values = mycolors) + theme_light() +   scale_fill_brewer(palette = "Set1") +
+  scale_color_brewer(palette = "Set1")
+
+second  
+  
+#png("Sialadenitis.png", units="in", width=15, height=10, res=1000)
+plot_grid(first,second,ncol=1)
+
+#dev.off()
