@@ -1,0 +1,20 @@
+setwd("~/Documents/Salivary glands/Mouse salivary glands/violin_plots/High_exp_in_Cd1")
+
+library(rcartocolor)
+library(ggplot2)
+genes <- read.csv("more_in_cd1.csv")
+head(genes)
+
+my_pal <- rcartocolor::carto_pal(n = 7, name = "Vivid")#[c(1, 3, 7, 2)]
+my_pal
+
+g <- ggplot(genes, aes(x = Sex, y = log(Expression+1,10), color = Genes, fill = Genes)) +
+  scale_y_continuous(breaks = 1:9) +
+  facet_grid(Genes~Strain+Glands, scales="free") +  scale_fill_manual(values = my_pal, guide = "none") +
+  scale_color_manual(values = my_pal, guide = "none") +
+  theme_bw()
+g + 
+  geom_violin(alpha = .5, size = 1.5)  + geom_jitter(width = .01, size = 3, alpha = .3)
+
+
+
