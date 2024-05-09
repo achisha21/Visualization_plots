@@ -1,0 +1,94 @@
+---
+title: "venn diagrams"
+author: "Achisha Saikia"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+setwd("/Volumes/project-2/bioinformatics/JLee_lab/s224730/Marek/shRNA_18_samples_Human_aug2023/outputs/readCounts/Deseq2_without_C1/Analysis_1.4_9.4/Venn_diagram")
+
+library(ggplot2)
+
+```
+
+
+1.4, 2.4, 9.4 down
+
+```{r}
+first_down <- read.csv("Analysis_1.4_downreg_genes.csv")
+second_down <- read.csv("Analysis_2.4__downreg_genes.csv")
+ninth_down <- read.csv("Analysis_9.4_downreg_genes.csv")
+
+```
+
+
+```{r}
+#install.packages("ggVennDiagram")
+library(ggVennDiagram)
+first_down_venn <- first_down$X
+second_down_venn <- second_down$X
+ninth_down_venn <- ninth_down$X
+
+```
+
+```{r}
+
+x <- list(first_down_venn, second_down_venn, ninth_down_venn)
+
+```
+
+
+```{r}
+y<- ggVennDiagram(x, category.names = c("Patient/Control", "Patient SCR/Control SCR", "Both FXNsh/Control SCR"), color = "black", lwd = 0.8, lty = 0.5) + scale_fill_gradient(low = "#F4FAFE", high = "#4981BF") 
+venn_plot<- y+ scale_x_continuous(expand = expansion(mult = .4)) + ggtitle("All Downregulated genes")
+ggsave("venn_diagram.png", plot = venn_plot, width = 8, height = 6, units = "in", dpi=300, limitsize = FALSE)
+
+# expand axis to show long set labels
+
+```
+
+
+```{r}
+
+y<- ggVennDiagram(x, category.names = c("Patient/Control", "Patient SCR/Control SCR", "Both FXNsh/Control SCR"), color = "black", lwd = 0.8, lty = 0.5) + scale_fill_gradient(low = "#F4FAFE", high = "#4981BF") 
+venn_plot<- y+ scale_x_continuous(expand = expansion(mult = .4)) + ggtitle("All Downregulated genes")
+venn_plot 
+```
+
+1.4, 2.4, 9.4 Up
+
+```{r}
+first_up <- read.csv("Analysis_1.4_upreg_genes.csv")
+second_up <- read.csv("Analysis_2.4_upreg_genes.csv")
+ninth_up <- read.csv("Analysis_9.4_upreg_genes.csv")
+
+
+first_up_venn <- first_up$X
+second_up_venn <- second_up$X
+ninth_up_venn <- ninth_up$X
+
+```
+
+```{r}
+up <- list(first_up_venn, second_up_venn, ninth_up_venn)
+
+```
+
+
+
+```{r}
+# Creating the Venn Diagram with updated color gradient to orange tones
+up1 <- ggVennDiagram(up, category.names = c("Patient/Control", "Patient SCR/Control SCR", "Both FXNsh/Control SCR"),
+                   color = "black", lwd = 0.8, lty = 0.5) +
+  scale_fill_gradient(low = "#FDE0CC", high = "#FF6347") # light orange to more vivid orange
+
+# Adjusting x-axis expansion and adding a title
+venn_plot_up <- up1 + scale_x_continuous(expand = expansion(mult = .4)) + ggtitle("All Upregulated genes")
+
+# Display the plot
+venn_plot_up
+
+#ggsave("venn_diagram_upreg.png", plot = venn_plot_up, width = 8, height = 6, units = "in", dpi=300, limitsize = FALSE)
+```
+
